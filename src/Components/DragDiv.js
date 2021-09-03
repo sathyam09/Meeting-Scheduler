@@ -31,6 +31,7 @@ const Draggable = (props) => {
             // call a function whenever the cursor moves:
             document.onmousemove = elementDrag;
           }
+          
         var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
         if (document.getElementById(elmnt.id + "header")) {
           /* if present, the header is where you move the DIV from:*/
@@ -39,6 +40,7 @@ const Draggable = (props) => {
           /* otherwise, move the DIV from anywhere inside the DIV:*/
           elmnt.onmousedown = dragMouseDown;
         }
+        
       
         
       
@@ -56,7 +58,6 @@ const Draggable = (props) => {
         }
       
         const closeDragElement =() => {
-            let room = document.getElementById('mydiv').parentNode;
 
             if(props.data.timeProps.selectedDay){
                 setDragabale(false)

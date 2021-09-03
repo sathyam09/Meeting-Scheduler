@@ -72,7 +72,6 @@ const MeetingModal = (props,handler,dataProb) => {
             userList.push(emailInput)
         setUserList([...userList])
 
-        console.log(userList,"eeee")
         setErrorShow('')
     
 

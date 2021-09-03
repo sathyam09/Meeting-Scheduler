@@ -71,7 +71,8 @@ const TimeSlot = (props) => {
                 <div className="schedule-msg">
                     {allMeetings && allMeetings.map((meet) => (
                         
-                <div   key={meet.id}>{meet.meetingOnTime === time.time ? (<div><span className="meetingSlot">{meet.title}  <i id="deleteMeeting" className="fa fa-trash" onClick={ () => meetingDeleteHandler(meet.id)}></i></span></div>) :null} </div>
+                        
+                <div key={meet.id}>{meet.meetingOnTime === time.time ? (<div><span className="meetingSlot">{meet.title}  <i id="deleteMeeting" className="fa fa-trash" onClick={ () => meetingDeleteHandler(meet.id)}></i></span></div>) :null} </div>
                              
                             
                     ))}
