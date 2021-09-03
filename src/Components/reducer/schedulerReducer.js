@@ -6,7 +6,9 @@ let initialState = [
                     meetingMonth:"SEPTEMBER",
                     meetingYear:"2021",
                     meetingDate:5,
-                    meetingOnTime:"4 AM"
+                    meetingOnTime:"4 AM",
+                    outOfOffice:false,
+                    visiblityMode:"Private"
     },{
         title:"PROJECT DISCUSSION",
         inputEmailList:["sathya@gmail.com","xy@gmail.com"],
@@ -14,7 +16,9 @@ let initialState = [
         meetingMonth:"SEPTEMBER",
         meetingYear:"2021",
         meetingDate:5,
-        meetingOnTime:"7 AM"
+        meetingOnTime:"7 AM",
+        outOfOffice:false,
+        visiblityMode:"Private"
 }
 
 ];

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import validator from 'validator';
 import { connect } from "react-redux";
 import { addUser } from './reducer/action';
+import { DropdownButton, Dropdown } from "react-bootstrap";
 
 
 import { Modal, Button} from "react-bootstrap";
@@ -9,11 +10,13 @@ import { Modal, Button} from "react-bootstrap";
 
 const MeetingModal = (props,handler,dataProb) => {
     const [userList, setUserList] = useState([]);
+    const [outOfOffice, setOutOfOffice] = useState(false)
     const [emailInput, setEmailInput] = useState("")
     const [showResults, setShowResults] = useState(false);
     const [errorShow,setErrorShow] = useState('');
     const [titleInput, setTitleInput] = useState('')
     const [titleError, setTitleError] = useState('');
+    const [visiblityMode, setVisiblityMode] = useState('Private')
     
     
 
@@ -25,9 +28,14 @@ const MeetingModal = (props,handler,dataProb) => {
         setTitleError('')
         setErrorShow('')
         setTitleInput('')
+        setOutOfOffice(false)
+        setVisiblityMode('Private')
     }
     const handleShow = () => {
-        if(titleInput){
+        if(!outOfOffice){
+
+        
+        if(titleInput ){
             if(userList.length > 0){
                 let meetingInfo ={
                     title:titleInput,
@@ -36,7 +44,9 @@ const MeetingModal = (props,handler,dataProb) => {
                     meetingMonth:props.dataProb.selectedMeetingMonth,
                     meetingYear:props.dataProb.selectedMeetingYear,
                     meetingDate:props.dataProb.selectedDay,
-                    meetingOnTime:"1 AM"
+                    meetingOnTime:"1 AM",
+                    outOfOffice:outOfOffice,
+                    visiblityMode:visiblityMode
                 }
                 props.addUser(meetingInfo)
                 setTitleError('')
@@ -45,6 +55,9 @@ const MeetingModal = (props,handler,dataProb) => {
                 setEmailInput('')
                 setUserList([])
                 setTitleInput('')
+                setOutOfOffice(false);
+                setVisiblityMode('Private')
+
         
             }else{
 
@@ -56,6 +69,29 @@ const MeetingModal = (props,handler,dataProb) => {
         }else{
             setTitleError("Please Enter Title")
         }
+    }else{
+        let meetingInfo ={
+            title:titleInput,
+            inputEmailList:[],
+            id:0,
+            meetingMonth:props.dataProb.selectedMeetingMonth,
+            meetingYear:props.dataProb.selectedMeetingYear,
+            meetingDate:props.dataProb.selectedDay,
+            meetingOnTime:"1 AM",
+            outOfOffice:outOfOffice,
+            visiblityMode:visiblityMode
+        }
+        props.addUser(meetingInfo)
+        setTitleError('')
+        props.modalHandler(false,"open")
+        setShowResults(false)
+        setEmailInput('')
+        setUserList([])
+        setTitleInput('')
+        setOutOfOffice(false)
+        setVisiblityMode('Private')
+
+    }
        
     }
     const addPeopleHandler = () => {
@@ -98,6 +134,8 @@ const MeetingModal = (props,handler,dataProb) => {
           </Modal.Title>
           <span className="error-text">{titleError}</span>
 
+          <div><input type="checkbox" value={outOfOffice} onChange ={(e) => setOutOfOffice(e.target.checked) } ></input> Out Of Office</div>
+
         </Modal.Header>
         <Modal.Body>
             <div className="meeting-time">
@@ -122,9 +160,14 @@ const MeetingModal = (props,handler,dataProb) => {
                 </ul>
 
             </div>
-            
+            <DropdownButton  title={visiblityMode}>
+                <Dropdown.Item as="button" onClick= { () =>  {setVisiblityMode('Private')}} >Private</Dropdown.Item>
+
+                <Dropdown.Item as="button" onClick= { () =>  {setVisiblityMode('Public')}}>Public</Dropdown.Item>
+              </DropdownButton>
             </Modal.Body>
         <Modal.Footer>
+            
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>

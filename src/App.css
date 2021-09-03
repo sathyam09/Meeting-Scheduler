@@ -180,3 +180,8 @@ tr {
   #deleteMeeting{
     font-size: 20px;
   }
+  .blocked-slot{
+    background-color: lightpink;
+    display: flex;
+    color:white;
+  }
