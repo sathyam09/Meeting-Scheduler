@@ -2,12 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { combineReducers, createStore } from 'redux';
+import SchedulerReducer from './Components/reducer/schedulerReducer';
 import reportWebVitals from './reportWebVitals';
+import {Provider} from 'react-redux'
+
+const rootReducer = combineReducers({
+  scheduler: SchedulerReducer
+
+})
+
+
+const store = createStore(rootReducer);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
