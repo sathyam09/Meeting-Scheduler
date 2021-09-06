@@ -3,6 +3,7 @@ import Draggable from './DragDiv';
 import { useSelector, useDispatch } from 'react-redux';
 import { connect } from "react-redux";
 import { removeMeeting } from './reducer/action';
+import DragComponent from './dragComp';
 
 
 
@@ -18,9 +19,8 @@ const TimeSlot = (props) => {
 
 
     let scheduleTimes = [
-            {id:0,time:"12 AM"},
-        { id: 1, time: "1 AM" },
-        { id: 2, time: "2 AM" },
+            {id:1,time:"12 AM"},
+        { id: 2, time: "1 AM" },
         { id: 3, time: "2 AM" },
         { id: 4, time: "3 AM" },
         { id: 5, time: "4 AM" },
@@ -57,23 +57,30 @@ const TimeSlot = (props) => {
       const timeSlotHandler =(id) => {
         setClickedId(id)
     }
-      
+      const outOffHandler = (id) => {
+        alert('Meeting slots blocked')
+      }
     return(
         <div>
             <h4>{props.timeProps.selectedDay} {props.timeProps.selectedMeetingMonth} {props.timeProps.selectedMeetingYear}</h4>
 
             {scheduleTimes.map((time) => (
-            <div className="schedule-box" key={time.id} onClick={() =>timeSlotHandler(time.id) }>
-                
-            <Draggable id={time.id} clickId={clickedId} time={time.time} show={scheduleDrag} data={props} />
+            <div className="schedule-box" key={time.id} >
+            {/* <Draggable id={time.id} clickId={clickedId} time={time.time} show={scheduleDrag} data={props} /> */}
 
                 <div className="schedule-time">{time.time}</div>
-                <div className="schedule-msg">
+                <div className="schedule-msg" onClick={() => timeSlotHandler(time.id) }>
+                <DragComponent id={time.id} clickId={clickedId} time={time.time} show={scheduleDrag} data={props}/>
+
                     {allMeetings && allMeetings.map((meet) => (
                         
-                       <div key={meet.id}> { meet.outOfOffice ? <div className="blocked-slot">Out of office</div> :
-                <div key={meet.id}>{meet.meetingOnTime === time.time ? (<div><span className="meetingSlot">{meet.title}  <i id="deleteMeeting" className="fa fa-trash" onClick={ () => meetingDeleteHandler(meet.id)}></i></span></div>) :null} </div>}
-                             </div>
+                       <div key={meet.id}> 
+                       { meet.outOfOffice ? <div  className="blocked-slot" onClick={() => outOffHandler(time.id) }>Out of office</div> :
+                       
+                <div key={meet.id}>
+                    {meet.meetingOnTime === time.time ? (<div><span className="meetingSlot">{meet.title}  <i id="deleteMeeting" className="fa fa-trash" onClick={ () => meetingDeleteHandler(meet.id)}></i></span></div>) :null}
+                     </div>}
+                    </div>
                             
                     ))}
 

@@ -8,7 +8,8 @@ let initialState = [
                     meetingDate:5,
                     meetingOnTime:"4 AM",
                     outOfOffice:false,
-                    visiblityMode:"Private"
+                    visiblityMode:"Private",
+                    isMeeting:true
     },{
         title:"PROJECT DISCUSSION",
         inputEmailList:["sathya@gmail.com","xy@gmail.com"],
@@ -18,7 +19,8 @@ let initialState = [
         meetingDate:5,
         meetingOnTime:"7 AM",
         outOfOffice:false,
-        visiblityMode:"Private"
+        visiblityMode:"Private",
+        isMeeting:true
 }
 
 ];

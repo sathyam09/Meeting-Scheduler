@@ -16,8 +16,7 @@ const MeetingModal = (props,handler,dataProb) => {
     const [errorShow,setErrorShow] = useState('');
     const [titleInput, setTitleInput] = useState('')
     const [titleError, setTitleError] = useState('');
-    const [visiblityMode, setVisiblityMode] = useState('Private')
-    
+    const [visiblityMode, setVisiblityMode] = useState('Private');
     
 
     const handleClose = () =>{
@@ -29,7 +28,7 @@ const MeetingModal = (props,handler,dataProb) => {
         setErrorShow('')
         setTitleInput('')
         setOutOfOffice(false)
-        setVisiblityMode('Private')
+        setVisiblityMode('Private');
     }
     const handleShow = () => {
         if(!outOfOffice){
@@ -44,9 +43,10 @@ const MeetingModal = (props,handler,dataProb) => {
                     meetingMonth:props.dataProb.selectedMeetingMonth,
                     meetingYear:props.dataProb.selectedMeetingYear,
                     meetingDate:props.dataProb.selectedDay,
-                    meetingOnTime:"1 AM",
+                    meetingOnTime:props.selectedTimeId,
                     outOfOffice:outOfOffice,
-                    visiblityMode:visiblityMode
+                    visiblityMode:visiblityMode,
+                    isMeeting:true
                 }
                 props.addUser(meetingInfo)
                 setTitleError('')
@@ -77,9 +77,10 @@ const MeetingModal = (props,handler,dataProb) => {
             meetingMonth:props.dataProb.selectedMeetingMonth,
             meetingYear:props.dataProb.selectedMeetingYear,
             meetingDate:props.dataProb.selectedDay,
-            meetingOnTime:"1 AM",
+            meetingOnTime:props.selectedTimeId,
             outOfOffice:outOfOffice,
-            visiblityMode:visiblityMode
+            visiblityMode:visiblityMode,
+            isMeeting:true
         }
         props.addUser(meetingInfo)
         setTitleError('')
@@ -140,11 +141,11 @@ const MeetingModal = (props,handler,dataProb) => {
         <Modal.Body>
             <div className="meeting-time">
                 <div className="meeting-month">{props.dataProb.selectedMeetingMonth}, {props.dataProb.selectedDay} {props.dataProb.selectedMeetingYear}</div>
-                <div className="meeting-startTime">1.30pm</div>
+                <div className="meeting-startTime">{props.selectedTimeId}</div>
             </div>
             <div className="meeting-time">
                 <div className="meeting-month">{props.dataProb.selectedMeetingMonth}, {props.dataProb.selectedDay} {props.dataProb.selectedMeetingYear}</div>
-                <div className="meeting-startTime">1.30pm</div>
+                <div className="meeting-startTime">{props.selectedTimeId}</div>
             </div>
             <p>India Standard Time</p>
             <div className="add-people" onClick={addPeopleHandler}>
