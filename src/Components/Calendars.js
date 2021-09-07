@@ -1,10 +1,7 @@
 import React from "react";
 import moment from "moment";
-import { range } from "moment-range";
 import "./Calendar.css";
-import TimeSlot from "./TimeSlot";
 import DragBox from "./DragDiv";
-import TimerSlot from "./Timerslot";
 
 export default class Calendar extends React.Component {
   weekdayshort = moment.weekdaysShort();

@@ -1,98 +1,5 @@
-// import React, { useEffect, useState } from "react";
-// import  MeetingModal from './Modal'
 
-// const Draggable = (props) => {
-//     const [dragabale, setDragabale] = useState(true);
-//     const[modalShow,setModalShow] = useState(false);
-//     const [dragshowDiv, setDragshowDiv] = useState(props.show);
-
-//     useEffect(() => {
-//         dragElement(document.getElementById('mydiv'))
-//         if(dragabale){
-//             setDragshowDiv(props.show)
-
-//         }
-//       });
-
-//     const dragElement = (elmnt) => {
-//         const dragMouseDown =(e) => {
-//             setDragabale(true)
-//             e = e || window.event;
-//             e.preventDefault();
-
-//             // get the mouse cursor position at startup:
-//             pos3 = e.clientX;
-//             pos4 = e.clientY;
-//             document.onmouseup = closeDragElement;
-//             // call a function whenever the cursor moves:
-//             document.onmousemove = elementDrag;
-//           }
-
-//         var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-//         if (document.getElementById(elmnt.id + "header")) {
-//           /* if present, the header is where you move the DIV from:*/
-//           document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-//         } else {
-//           /* otherwise, move the DIV from anywhere inside the DIV:*/
-//           elmnt.onmousedown = dragMouseDown;
-//         }
-
-//         const elementDrag = (e) => {
-//           e = e || window.event;
-//           e.preventDefault();
-//           // calculate the new cursor position:
-//           pos1 = pos3 - e.clientX;
-//           pos2 = pos4 - e.clientY;
-//           pos3 = e.clientX;
-//           pos4 = e.clientY;
-//           // set the element's new position:
-//           elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-//           elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-//         }
-
-//         const closeDragElement =() => {
-
-//             if(props.data.timeProps.selectedDay){
-//                 setDragabale(false)
-//                 setModalShow(true)
-//             }
-
-//           /* stop moving when mouse button is released:*/
-//           document.onmouseup = null;
-//           document.onmousemove = null;
-
-//         }
-//     }
-
-//    const modeShowHandler = (mode,status) => {
-//     setModalShow(false)
-//     if(status === "open"){
-//         setDragabale(false)
-//         setDragshowDiv('hidden');
-//     }
-//    }
-
-// return(
-//     <div>
-//  <div id="mydiv" className={props.id === props.clickId ? "block":"hidden"} time={props.time}>
-
-//   <div id="mydivheader" >
-
-//   </div>
-//   <MeetingModal show={modalShow} modalHandler={modeShowHandler} dataProb={props.data.timeProps} />
-
-// </div>
-//     </div>
-
-// )
-
-// }
-
-// export default Draggable;
-
-// =============================================================================================
-
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./dragComp.css";
 import MeetingModal from "./Modal";
 import { useSelector, useDispatch } from "react-redux";
@@ -102,6 +9,7 @@ import { removeMeeting } from "./reducer/action";
 const DragBox = (props) => {
   const allMeetings = useSelector((state) => state.scheduler);
   const dispatch = useDispatch();
+
 
   const [dragItem, setDragItem] = useState();
   const [list, setList] = useState([
@@ -195,18 +103,18 @@ const DragBox = (props) => {
     alert("Meeting slot blocked");
   };
 
-  const meetingTimeValidator = (time, meet) => {
-    console.log(time, meet, "Timeeeeeeeee");
-    if (
-      time.timeProb.selectedMonth === meet.meetingMonth &&
-      time.timeProb.selectedDay === meet.meetingDate &&
-      time.timeProb.selectedYear === meet.meetingYear
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+//   const meetingTimeValidator = (time,meet) => {
+//     console.log(time,meet,"Timeeeeeeeee")
+//     if( time.timeProb.selectedMonth === meet.meetingMonth &&
+//       time.timeProb.selectedDay === meet.meetingDate &&
+//       time.timeProb.selectedYear === meet.meetingYear){
+//         return true
+
+//       }else{
+// return false
+//       }
+   
+//   }
 
   const handleDrop = (e) => {
     // e.target.style.backgroundColor = "black";
@@ -232,57 +140,50 @@ const DragBox = (props) => {
             >
               <div className="slec-time"> {scheduleTimes[index].time} </div>
               {allMeetings &&
-                allMeetings.map((meet, i) =>
-                  props.timeProb.selectedMonth === meet.meetingMonth &&
-                  props.timeProb.selectedDay === meet.meetingDate &&
-                  props.timeProb.selectedYear === meet.meetingYear &&
-                  !meet.outOfOffice &&
-                  meet.isMeeting &&
-                  scheduleTimes[index].time === meet.meetingOnTime ? (
-                    <div className="meetingSlot">
-                      {meet.title}{" "}
-                      <i
-                        id="deleteMeeting"
-                        className="fa fa-trash"
-                        onClick={() => meetingDeleteHandler(meet.id)}
-                      ></i>
-                    </div>
-                  ) : null
-                )}
-              {allMeetings &&
-                allMeetings.map((meet, i) =>
-                  props.timeProb.selectedMonth === meet.meetingMonth &&
-                  props.timeProb.selectedDay === meet.meetingDate &&
-                  props.timeProb.selectedYear === meet.meetingYear &&
-                  meet.outOfOffice &&
-                  meet.isMeeting &&
-                  scheduleTimes[index].time === meet.meetingOnTime ? (
-                    <div
+                allMeetings.map((meet,i) => (
+                     props.timeProb.selectedMonth === meet.meetingMonth &&
+                    props.timeProb.selectedDay === meet.meetingDate &&
+                    props.timeProb.selectedYear === meet.meetingYear &&
+                    !meet.outOfOffice && meet.isMeeting &&
+                    scheduleTimes[index].time === meet.meetingOnTime ? (
+                      <div className="meetingSlot">
+                        {meet.title}
+                        <i
+                          id="deleteMeeting"
+                          className="fa fa-trash"
+                          onClick={() => meetingDeleteHandler(meet.id)}
+                        ></i>
+                      </div>
+                    ) : props.timeProb.selectedMonth === meet.meetingMonth &&
+                    props.timeProb.selectedDay === meet.meetingDate &&
+                    props.timeProb.selectedYear === meet.meetingYear &&
+                    meet.outOfOffice && meet.isMeeting &&
+                    scheduleTimes[index].time === meet.meetingOnTime ? (
+                      <div
                       className="blocked-slot"
                       onClick={() => outOffHandler("")}
                     >
                       Out of office
                     </div>
-                  ) : null
-                )}
-              <div
-                onClick={(e) => modalShowHandler(true, e)}
-                id={scheduleTimes[index].time}
-                className="drag-li"
-              ></div>
-              {/* {allMeetings.forEach((element) => {
-                if (!element.outOfOffice && !element.isMeeting) {
-                  console.log(element, "LLLLLLLLLLL");
-                } else {
-                  return (
+                    ) : null
                     
-                  );
-                }
-              })} */}
+                ))}
+                
+
+              
+                      <div
+                    onClick={(e) => modalShowHandler(true, e)}
+                                id={scheduleTimes[index].time}
+                                className="drag-li"
+                              >
+                                
+                              </div>
+                  
+                
             </li>
           ))}
 
-        {/* <div
+{/* <div
   onClick={(e) => modalShowHandler(true, e)}
                                 id={scheduleTimes[index].time}
                                 className="drag-li"

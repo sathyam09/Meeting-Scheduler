@@ -33,3 +33,11 @@
     padding: 10px;
     width: 22%;
   }
+
+  .blocked-slot ~ .drag-li{
+      display: none;
+  }
+
+  .meetingSlot ~ .drag-li{
+    display: none;
+  }
