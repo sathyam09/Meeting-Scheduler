@@ -17,10 +17,12 @@ const MeetingModal = (props,handler,dataProb) => {
     const [titleInput, setTitleInput] = useState('')
     const [titleError, setTitleError] = useState('');
     const [visiblityMode, setVisiblityMode] = useState('Private');
+    const [timeId, setTimeId] = useState('')
+    const timePoint = props.selectedTimeId.split(' ')
     
 
     const handleClose = () =>{
-        props.modalHandler(false,"close")
+        props.modalHandler(false)
         setShowResults(false)
         setEmailInput('')
         setUserList([])
@@ -40,8 +42,8 @@ const MeetingModal = (props,handler,dataProb) => {
                     title:titleInput,
                     inputEmailList:userList,
                     id:0,
-                    meetingMonth:props.dataProb.selectedMeetingMonth,
-                    meetingYear:props.dataProb.selectedMeetingYear,
+                    meetingMonth:props.dataProb.selectedMonth,
+                    meetingYear:props.dataProb.selectedYear,
                     meetingDate:props.dataProb.selectedDay,
                     meetingOnTime:props.selectedTimeId,
                     outOfOffice:outOfOffice,
@@ -50,7 +52,7 @@ const MeetingModal = (props,handler,dataProb) => {
                 }
                 props.addUser(meetingInfo)
                 setTitleError('')
-                props.modalHandler(false,"open")
+                props.modalHandler(false)
                 setShowResults(false)
                 setEmailInput('')
                 setUserList([])
@@ -74,8 +76,8 @@ const MeetingModal = (props,handler,dataProb) => {
             title:titleInput,
             inputEmailList:[],
             id:0,
-            meetingMonth:props.dataProb.selectedMeetingMonth,
-            meetingYear:props.dataProb.selectedMeetingYear,
+            meetingMonth:props.dataProb.selectedMonth,
+            meetingYear:props.dataProb.selectedYear,
             meetingDate:props.dataProb.selectedDay,
             meetingOnTime:props.selectedTimeId,
             outOfOffice:outOfOffice,
@@ -84,7 +86,7 @@ const MeetingModal = (props,handler,dataProb) => {
         }
         props.addUser(meetingInfo)
         setTitleError('')
-        props.modalHandler(false,"open")
+        props.modalHandler(false)
         setShowResults(false)
         setEmailInput('')
         setUserList([])
@@ -140,12 +142,12 @@ const MeetingModal = (props,handler,dataProb) => {
         </Modal.Header>
         <Modal.Body>
             <div className="meeting-time">
-                <div className="meeting-month">{props.dataProb.selectedMeetingMonth}, {props.dataProb.selectedDay} {props.dataProb.selectedMeetingYear}</div>
+                <div className="meeting-month">{props.dataProb.selectedMonth}, {props.dataProb.selectedDay} {props.dataProb.selectedYear}</div>
                 <div className="meeting-startTime">{props.selectedTimeId}</div>
             </div>
             <div className="meeting-time">
-                <div className="meeting-month">{props.dataProb.selectedMeetingMonth}, {props.dataProb.selectedDay} {props.dataProb.selectedMeetingYear}</div>
-                <div className="meeting-startTime">{props.selectedTimeId}</div>
+                <div className="meeting-month">{props.dataProb.selectedMonth}, {props.dataProb.selectedDay} {props.dataProb.selectedYear}</div>
+                <div className="meeting-startTime">{timePoint[0] +":30"+  timePoint[1]}</div>
             </div>
             <p>India Standard Time</p>
             <div className="add-people" onClick={addPeopleHandler}>

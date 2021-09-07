@@ -3,7 +3,7 @@ let initialState = [
         title:"PROJECT DEMO MEETING",
                     inputEmailList:["sathya@gmail.com","xy@gmail.com"],
                     id:1,
-                    meetingMonth:"SEPTEMBER",
+                    meetingMonth:"September",
                     meetingYear:"2021",
                     meetingDate:5,
                     meetingOnTime:"4 AM",
@@ -14,13 +14,25 @@ let initialState = [
         title:"PROJECT DISCUSSION",
         inputEmailList:["sathya@gmail.com","xy@gmail.com"],
         id:2,
-        meetingMonth:"SEPTEMBER",
+        meetingMonth:"September",
         meetingYear:"2021",
         meetingDate:5,
         meetingOnTime:"7 AM",
         outOfOffice:false,
         visiblityMode:"Private",
         isMeeting:true
+},
+{
+    title:"PROJECT DEMO MEETING",
+                    inputEmailList:["sathya@gmail.com","xy@gmail.com"],
+                    id:1,
+                    meetingMonth:"September",
+                    meetingYear:"2021",
+                    meetingDate:5,
+                    meetingOnTime:"1 AM",
+                    outOfOffice:true,
+                    visiblityMode:"Private",
+                    isMeeting:true
 }
 
 ];

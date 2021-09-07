@@ -178,6 +178,7 @@ tr {
     background-color: lightseagreen;
     padding: 4px;
     color: white;
+    margin: 5px;
   }
   #deleteMeeting{
     font-size: 20px;
@@ -187,7 +188,7 @@ tr {
     display: flex;
     color:white;
   }
-  .drag-comp{
+  #dragComp{
     background-color: paleturquoise;
     border-radius: 10px;
   }

@@ -162,6 +162,8 @@ export default class Calendar extends React.Component {
                 onKeyUp= {(e) => this.onKeyUpYear(e)}
                 onChange = {(e) => this.onYearChange(e)}
                 type="number"
+                min="1990"
+                max="2021"
                 placeholder="year"/>
             :
             <span  ref={this.myYearRef}

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { connect } from "react-redux";
 import { removeMeeting } from './reducer/action';
 import DragComponent from './dragComp';
+import DragBox from './DragDiv';
 
 
 
@@ -58,7 +59,7 @@ const TimeSlot = (props) => {
         setClickedId(id)
     }
       const outOffHandler = (id) => {
-        alert('Meeting slots blocked')
+        alert('Meeting slots')
       }
     return(
         <div>
@@ -66,11 +67,14 @@ const TimeSlot = (props) => {
 
             {scheduleTimes.map((time) => (
             <div className="schedule-box" key={time.id} >
-            {/* <Draggable id={time.id} clickId={clickedId} time={time.time} show={scheduleDrag} data={props} /> */}
+            <Draggable id={time.id} clickId={clickedId} time={time.time} show={scheduleDrag} data={props} />
 
                 <div className="schedule-time">{time.time}</div>
+                {/* <DragBox id={time.id} clickId={clickedId} time={time.time} show={scheduleDrag} data={props} /> */}
+
                 <div className="schedule-msg" onClick={() => timeSlotHandler(time.id) }>
-                <DragComponent id={time.id} clickId={clickedId} time={time.time} show={scheduleDrag} data={props}/>
+
+                {/* <DragComponent id={time.id} clickId={clickedId} time={time.time} show={scheduleDrag} data={props}/> */}
 
                     {allMeetings && allMeetings.map((meet) => (
                         
